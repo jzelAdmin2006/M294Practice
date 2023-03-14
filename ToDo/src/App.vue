@@ -18,6 +18,16 @@ const sortedTasksByPriority = computed(() => {
   })
 })
 
+const undoneEstimationsSum = computed(() => {
+  return tasks.value.filter(task => !task.done)
+    .reduce((sum, task) => sum + task.estimation, 0)
+})
+
+const numberOfUndoneTasks = computed(() => {
+  return tasks.value.filter(task => task.done).length
+})
+
+
 function add() {
   tasks.value.push({
     text: inputText.value,
@@ -43,7 +53,8 @@ function deleteTask(index) {
     </h2>
 
     <p>
-      {{ tasks.filter(task => task.done).length }} von {{ tasks.length }} Tasks sind erledigt
+      {{ numberOfUndoneTasks }} von {{ tasks.length }} Tasks sind erledigt, {{ undoneEstimationsSum }}h
+      Aufwand offen
     </p>
 
     <div class="form-group">
