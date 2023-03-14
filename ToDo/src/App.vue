@@ -92,7 +92,7 @@ function deleteTask(index) {
         <tr v-for="(task, index) in sortedTasksByPriority"
           v-bind:class="{ 'is-done': task.done, 'high-priority': task.high_priority }">
           <td><input id="done" type="checkbox" v-model="task.done"></td>
-          <td>{{ task.high_priority }}</td>
+          <td>{{ task.high_priority ? "hoch" : "normal" }}</td>
           <td>{{ task.text }}</td>
           <td>{{ task.estimation }}</td>
           <td>
