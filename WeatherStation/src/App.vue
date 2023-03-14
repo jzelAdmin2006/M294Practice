@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import { computed } from 'vue'
 const temperatureCelsius = ref(0)
-const temperatureFahrenheit = computed(() => temperatureCelsius.value * 1.8 + 32)
-const temperatureKelvin = computed(() => temperatureCelsius.value + 273.15)
+const temperatureFahrenheit = computed(() => roundTo2Digits(temperatureCelsius.value * 1.8 + 32))
+const temperatureKelvin = computed(() => roundTo2Digits(temperatureCelsius.value + 273.15))
 const isFreezing = computed(() => temperatureCelsius.value < 0)
 
 function colder() {
@@ -12,6 +12,10 @@ function colder() {
 
 function warmer() {
   temperatureCelsius.value++
+}
+
+function roundTo2Digits(value) {
+  return Math.round(value * 100) / 100
 }
 </script>
 
