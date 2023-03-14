@@ -4,12 +4,14 @@
   const bitcoinPrice = ref(16914)
 
   const investments = ref([
-    { count: 4, price: 20000 },
-    { count: 4, price: 20000 },
+    { count: 4, price: 20000, date: new Date(2020, 1, 1)},
+    { count: 4, price: 20000, date: new Date(2021, 1, 1)},
+    { count: 7, price: 10000, date: new Date(2022, 1, 1)},
   ])
 
   const inputCount = ref('')
   const inputPrice = ref('')
+  const inputDate = ref('')
 
   const balance = computed(() => {
     let balance = 0
@@ -43,6 +45,7 @@
     investments.value.push({
       count: inputCount.value,
       price: inputPrice.value,
+      date: new Date(inputDate.value)
     })
   }
 </script>
@@ -64,6 +67,10 @@
     	<div class="flex-1">
         <label for="price">Bitcoin-Kurs</label>
     		<input type="number" id="price" v-model="inputPrice">
+      </div>
+      <div class="flex-1">
+        <label for="date">Datum</label>
+    		<input type="date" id="date" v-model="inputDate">
       </div>
       <button type="submit">
         Erfassen
@@ -88,8 +95,8 @@
   </div>
   
   <ul class="box">
-    <li>
-    	? BTC zum Preis von ??? Fr.
+    <li v-for="investment in investments">
+    	{{ investment.count}} BTC zum Preis von {{ investment.price }} Fr. am {{ investment.date.toISOString().slice(0, 10) }}
     </li>
   </ul>
 </template>
