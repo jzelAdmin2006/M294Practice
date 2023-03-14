@@ -41,7 +41,7 @@ function deleteTask(index) {
     <h2>
       Aufgabenliste
     </h2>
-    
+
     <p>
       {{ tasks.filter(task => task.done).length }} von {{ tasks.length }} Tasks sind erledigt
     </p>
@@ -66,53 +66,103 @@ function deleteTask(index) {
         Task hinzufügen
       </button>
     </div>
-    
-    <ul>
-      <li v-for="task, index in sortedTasksByPriority" v-bind:class="{'is-done':task.done, 'high-priority':task.high_priority}">
-        <input id="done" type="checkbox" v-model="task.done">
-        {{ task.text }}
-        ({{ task.estimation }})
-        <button @click="deleteTask(index)">Löschen</button>
-      </li>
-    </ul>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Erledigt</th>
+          <th>Prio</th>
+          <th>Task</th>
+          <th>Stunden</th>
+          <th>Aktionen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(task, index) in sortedTasksByPriority"
+          v-bind:class="{ 'is-done': task.done, 'high-priority': task.high_priority }">
+          <td><input id="done" type="checkbox" v-model="task.done"></td>
+          <td>{{ task.high_priority }}</td>
+          <td>{{ task.text }}</td>
+          <td>{{ task.estimation }}</td>
+          <td>
+            <button @click="deleteTask(index)">Löschen</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <style>
-  .is-done {
-    text-decoration: line-through;
-  }
-  
-  .high-priority {
-    font-weight: bold;
-    color: red;
-  }
-  
-  .form-group {
-    display: block;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 2px;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 2px 5px;
-    height: 32px;
-    margin-bottom: 5px;
-  }
-  
-  .form-actions {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-  }
-  
-  .container {
-    margin: 20px auto;
-    max-width: 400px;
-    width: 100%;
-  }
+body {
+  font-family: sans-serif;
+}
+
+table {
+  background-color: lightgray;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  padding: 10px;
+  border: 1px black solid;
+}
+
+table th:first-child,
+table td:first-child {
+  border-left: none;
+}
+
+table th:last-child,
+table td:last-child {
+  border-right: none;
+}
+
+table tr:last-child th,
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table tr:first-child th {
+  border-top: none;
+  border-bottom: 3px black solid;
+}
+
+.is-done {
+  text-decoration: line-through;
+}
+
+.high-priority {
+  font-weight: bold;
+  color: red;
+}
+
+.form-group {
+  display: block;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 2px 5px;
+  height: 32px;
+  margin-bottom: 5px;
+}
+
+.form-actions {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.container {
+  margin: 20px auto;
+  max-width: 400px;
+  width: 100%;
+}
 </style>
