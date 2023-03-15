@@ -1,14 +1,11 @@
 <script setup>
 import { ref } from 'vue'
-
-const msg = ref('Hello World!')
+import HelloWorld from './HelloWorld.vue'
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-  <input v-model="msg">
+  <p>Wichtig: Doppelpunkt vor showText property, sonst wird true als String und nicht typenlos interpretiert.</p>
+  <HelloWorld msg="Hello World!" :showText="true" />
 </template>
 
-<style>
-  
-</style>
+<style></style>
