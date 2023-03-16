@@ -23,7 +23,7 @@ const undoneEstimationsSum = computed(() => {
     .reduce((sum, task) => sum + task.estimation, 0)
 })
 
-const numberOfUndoneTasks = computed(() => {
+const numberOfDoneTasks = computed(() => {
   return tasks.value.filter(task => task.done).length
 })
 
